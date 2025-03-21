@@ -1,0 +1,17 @@
+{
+  "name": "integration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "calculateAge.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "jsdoc": "jsdoc -c ./jsdoc.config.json -r -d ./docs"
+  },
+  "private": true,
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jsdoc": "^4.0.4"
+  }
+}
