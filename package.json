@@ -5,7 +5,9 @@
   "main": "calculateAge.js",
   "scripts": {
     "test": "jest --coverage",
-    "jsdoc": "jsdoc -c ./jsdoc.config.json -r -d ./docs"
+    "jsdoc": "jsdoc -c ./jsdoc.config.json -r -d ./docs",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "private": true,
   "devDependencies": {
@@ -13,5 +15,8 @@
     "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
     "jsdoc": "^4.0.4"
+  },
+  "dependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
