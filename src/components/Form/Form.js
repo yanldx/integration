@@ -34,6 +34,10 @@ const Form = ({ onSubmit }) => {
         if (!validatePostalCode(formData.postalCode)) newErrors.postalCode = 'Invalid postal code';
 
         if (Object.keys(newErrors).length === 0) {
+            const savedUsers = JSON.parse(localStorage.getItem('users')) || [];
+            savedUsers.push(formData);
+            localStorage.setItem('users', JSON.stringify(savedUsers));
+
             onSubmit(formData);
             setFormData({
                 firstName: '',

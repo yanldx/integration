@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const UserList = ({ users }) => {
+const UserList = () => {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        const savedUsers = JSON.parse(localStorage.getItem('users')) || [];
+        setUsers(savedUsers);
+    }, []);
+
     return (
         <div>
             <h2>Registered Users</h2>
