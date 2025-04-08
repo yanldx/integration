@@ -1,0 +1,21 @@
+/* App.css */
+
+header {
+    background-color: #282c34;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    border-bottom: 2px solid #61dafb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    font-family: 'Arial', sans-serif;
+}
+
+header p {
+    font-size: 1.2em;
+    color: #61dafb;
+}

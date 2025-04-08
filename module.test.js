@@ -44,12 +44,11 @@ describe('calculateAge Unit Test Suites', () => {
         birthDate.setFullYear(birthDate.getFullYear() - 23); // Personne née il y a 23 ans
 
         const person = { birth: birthDate };
-        const expectedAgeNextYear = 24; // L'année prochaine, la personne aura 24 ans
+        const expectedAgeNextYear = 24;
 
-        // Simulation du test comme s'il était exécuté l'année prochaine
         jest.useFakeTimers().setSystemTime(nextYear);
         expect(calculateAge(person)).toBe(expectedAgeNextYear);
-        jest.useRealTimers(); // Remettre le temps réel
+        jest.useRealTimers();
     });
 
 });
