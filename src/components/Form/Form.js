@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { validateAge, validatePostalCode, validateName, validateEmail } from '../../utils/validations';
 import './Form.css';
 
-const Form = ({ onSubmit }) => {
+const Form = ({ onSubmit, onUserAdded }) => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -13,6 +13,7 @@ const Form = ({ onSubmit }) => {
     });
 
     const [errors, setErrors] = useState({});
+    const [formSuccess, setFormSuccess] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -38,7 +39,8 @@ const Form = ({ onSubmit }) => {
             savedUsers.push(formData);
             localStorage.setItem('users', JSON.stringify(savedUsers));
 
-            onSubmit(formData);
+            onUserAdded(savedUsers);
+
             setFormData({
                 firstName: '',
                 lastName: '',
@@ -47,6 +49,8 @@ const Form = ({ onSubmit }) => {
                 city: '',
                 postalCode: '',
             });
+
+            setFormSuccess(true);
         } else {
             setErrors(newErrors);
         }
@@ -87,6 +91,8 @@ const Form = ({ onSubmit }) => {
                 {errors.postalCode && <p>{errors.postalCode}</p>}
             </div>
             <button type="submit" disabled={!isFormValid}>Submit</button>
+
+            {formSuccess && <p className="success-message">User successfully added!</p>}
         </form>
     );
 };
