@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "calculateAge.js",
+  "homepage": "https://yanldx.github.io/integration",
   "scripts": {
     "start": "react-scripts start",
     "test": "jest --coverage",
