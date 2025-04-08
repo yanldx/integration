@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from './components/Form/Form';
 import UserList from './components/UserList/UserList';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,9 +8,26 @@ import './App.css';
 const App = () => {
     const [users, setUsers] = useState([]);
 
+    useEffect(() => {
+        const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+        setUsers(storedUsers);
+    }, []);
+
+    useEffect(() => {
+        if (users.length > 0) {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+    }, [users]);
+
     const handleFormSubmit = (user) => {
-        setUsers([...users, user]);
+        setUsers((prevUsers) => [...prevUsers, user]);
         toast.success('User registered successfully!');
+    };
+
+    const handleDeleteUser = (index) => {
+        const updatedUsers = users.filter((_, i) => i !== index);
+        setUsers(updatedUsers);
+        toast.success('User deleted successfully!');
     };
 
     return (
@@ -21,7 +38,7 @@ const App = () => {
             </header>
             <main>
                 <Form onSubmit={handleFormSubmit} />
-                <UserList users={users} />
+                <UserList users={users} onDeleteUser={handleDeleteUser} />
                 <ToastContainer />
             </main>
         </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { validateAge, validatePostalCode, validateName, validateEmail } from '../../utils/validations';
 import './Form.css';
 
-const Form = ({ onSubmit, onUserAdded }) => {
+const Form = ({ onSubmit }) => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -13,7 +13,6 @@ const Form = ({ onSubmit, onUserAdded }) => {
     });
 
     const [errors, setErrors] = useState({});
-    const [formSuccess, setFormSuccess] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -35,12 +34,7 @@ const Form = ({ onSubmit, onUserAdded }) => {
         if (!validatePostalCode(formData.postalCode)) newErrors.postalCode = 'Invalid postal code';
 
         if (Object.keys(newErrors).length === 0) {
-            const savedUsers = JSON.parse(localStorage.getItem('users')) || [];
-            savedUsers.push(formData);
-            localStorage.setItem('users', JSON.stringify(savedUsers));
-
-            onUserAdded(savedUsers);
-
+            onSubmit(formData);
             setFormData({
                 firstName: '',
                 lastName: '',
@@ -49,8 +43,6 @@ const Form = ({ onSubmit, onUserAdded }) => {
                 city: '',
                 postalCode: '',
             });
-
-            setFormSuccess(true);
         } else {
             setErrors(newErrors);
         }
@@ -60,6 +52,7 @@ const Form = ({ onSubmit, onUserAdded }) => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <h2>Register New User</h2>
             <div>
                 <label>First Name:</label>
                 <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} />
@@ -91,8 +84,6 @@ const Form = ({ onSubmit, onUserAdded }) => {
                 {errors.postalCode && <p>{errors.postalCode}</p>}
             </div>
             <button type="submit" disabled={!isFormValid}>Submit</button>
-
-            {formSuccess && <p className="success-message">User successfully added!</p>}
         </form>
     );
 };
