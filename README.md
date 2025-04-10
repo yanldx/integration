@@ -73,9 +73,15 @@ Sur push vers la branche main.
 - Déploiement vers GitHub Pages.
 - Publication du package sur NPM.
 
+### NPM
+
+
+
 ### Documentation
 
 La documentation complète est générée à l'aide de JSDoc et est disponible dans le dossier docs. Pour générer la documentation, utilisez la commande suivante :
     
 ```bash
     npm run jsdoc
+
+
