@@ -39,3 +39,23 @@ jobs:
         run: npm run deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build_deploy_npm:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Authenticate with npm
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: build and publish package on NPM
+        run: |
+          npm ci
+          git config --global user.email "yan.ledoux@ynov.com"
+          git config --global user.name "yanldx"
+          npm run build-npm
+          npm version patch
+          npm publish --access public
