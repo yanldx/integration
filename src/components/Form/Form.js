@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 import { validateAge, validatePostalCode, validateName, validateEmail } from '../../utils/validations';
+import 'react-toastify/dist/ReactToastify.css';
 import './Form.css';
 
-const Form = ({ onSubmit }) => {
+const Formulaire = ({ onSubmit }) => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -26,12 +28,12 @@ const Form = ({ onSubmit }) => {
         e.preventDefault();
         const newErrors = {};
 
-        if (!validateName(formData.firstName)) newErrors.firstName = 'Invalid first name';
-        if (!validateName(formData.lastName)) newErrors.lastName = 'Invalid last name';
-        if (!validateEmail(formData.email)) newErrors.email = 'Invalid email';
-        if (!validateAge(formData.dateOfBirth)) newErrors.dateOfBirth = 'Must be at least 18 years old';
-        if (!validateName(formData.city)) newErrors.city = 'Invalid city name';
-        if (!validatePostalCode(formData.postalCode)) newErrors.postalCode = 'Invalid postal code';
+        if (!validateName(formData.firstName)) newErrors.firstName = 'Prénom invalide';
+        if (!validateName(formData.lastName)) newErrors.lastName = 'Nom invalide';
+        if (!validateEmail(formData.email)) newErrors.email = 'Adresse e-mail invalide';
+        if (!validateAge(formData.dateOfBirth)) newErrors.dateOfBirth = 'Vous devez avoir au moins 18 ans';
+        if (!validateName(formData.city)) newErrors.city = 'Nom de ville invalide';
+        if (!validatePostalCode(formData.postalCode)) newErrors.postalCode = 'Code postal invalide';
 
         if (Object.keys(newErrors).length === 0) {
             onSubmit(formData);
@@ -43,8 +45,10 @@ const Form = ({ onSubmit }) => {
                 city: '',
                 postalCode: '',
             });
+            setErrors({});
         } else {
             setErrors(newErrors);
+            toast.error("Le formulaire contient des erreurs. Veuillez les corriger.");
         }
     };
 
@@ -52,40 +56,48 @@ const Form = ({ onSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>Register New User</h2>
+            <h2>Inscription d’un nouvel utilisateur</h2>
+
             <div>
-                <label>First Name:</label>
+                <label>Prénom :</label>
                 <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} />
-                {errors.firstName && <p>{errors.firstName}</p>}
+                {errors.firstName && <p className="error">{errors.firstName}</p>}
             </div>
+
             <div>
-                <label>Last Name:</label>
+                <label>Nom :</label>
                 <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} />
-                {errors.lastName && <p>{errors.lastName}</p>}
+                {errors.lastName && <p className="error">{errors.lastName}</p>}
             </div>
+
             <div>
-                <label>Email:</label>
+                <label>Email :</label>
                 <input type="email" name="email" value={formData.email} onChange={handleChange} />
-                {errors.email && <p>{errors.email}</p>}
+                {errors.email && <p className="error">{errors.email}</p>}
             </div>
+
             <div>
-                <label>Date of Birth:</label>
+                <label>Date de naissance :</label>
                 <input type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleChange} />
-                {errors.dateOfBirth && <p>{errors.dateOfBirth}</p>}
+                {errors.dateOfBirth && <p className="error">{errors.dateOfBirth}</p>}
             </div>
+
             <div>
-                <label>City:</label>
+                <label>Ville :</label>
                 <input type="text" name="city" value={formData.city} onChange={handleChange} />
-                {errors.city && <p>{errors.city}</p>}
+                {errors.city && <p className="error">{errors.city}</p>}
             </div>
+
             <div>
-                <label>Postal Code:</label>
+                <label>Code postal :</label>
                 <input type="text" name="postalCode" value={formData.postalCode} onChange={handleChange} />
-                {errors.postalCode && <p>{errors.postalCode}</p>}
+                {errors.postalCode && <p className="error">{errors.postalCode}</p>}
             </div>
-            <button type="submit" disabled={!isFormValid}>Submit</button>
+
+            <button type="submit" disabled={!isFormValid}>Soumettre</button>
+            <ToastContainer />
         </form>
     );
 };
 
-export default Form;
+export default Formulaire;

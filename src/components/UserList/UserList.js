@@ -4,10 +4,10 @@ import './UserList.css';
 const UserList = ({ users, onDeleteUser }) => {
     return (
         <div>
-            <h2>Registered Users</h2>
+            <h2>Utilisateurs enregistrés</h2>
             <ul>
                 {users.length === 0 ? (
-                    <p>No users registered yet.</p>
+                    <p>Aucun utilisateur enregistré</p>
                 ) : (
                     users.map((user, index) => (
                         <li key={index}>

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Form from './components/Form/Form';
 import UserList from './components/UserList/UserList';
@@ -21,20 +22,20 @@ const App = () => {
 
     const handleFormSubmit = (user) => {
         setUsers((prevUsers) => [...prevUsers, user]);
-        toast.success('User registered successfully!');
+        toast.success('Utilisateur enregistré avec succès !');
     };
 
     const handleDeleteUser = (index) => {
         const updatedUsers = users.filter((_, i) => i !== index);
         setUsers(updatedUsers);
-        toast.success('User deleted successfully!');
+        toast.success('Utilisateur supprimé avec succès !');
     };
 
     return (
         <div>
             <header>
-                <h1>User Registration App</h1>
-                <p>Welcome to the User Registration Application</p>
+                <h1>Application d’enregistrement des utilisateurs</h1>
+                <p>Bienvenue dans l'application d'inscription</p>
             </header>
             <main>
                 <Form onSubmit={handleFormSubmit} />
