@@ -73,9 +73,6 @@ Sur push vers la branche main.
 - Déploiement vers GitHub Pages.
 - Publication du package sur NPM.
 
-### NPM
-
-
 
 ### Documentation
 
